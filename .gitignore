@@ -1,2 +1,5 @@
 /*.rbx[m,mx,l,lx]
 /*.rbx[m,mx,l,lx].lock
+
+/sourcemap.json
+/*.sourcemap.json
