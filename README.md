@@ -3,9 +3,6 @@
     <h1>Object Pool</h1>
 </div>
 <div align="center">
-    <a href="https://github.com/frqstbite/object-pool/actions/workflows/ci.yml">
-        <img src="https://github.com/frqstbite/object-pool/actions/workflows/ci.yml/badge.svg" alt="CI status" />
-    </a>
     <a href="https://frqstbite.github.io/object-pool/">
         <img src="https://github.com/frqstbite/object-pool/actions/workflows/docs.yml/badge.svg" alt="Docs status" />
     </a>
