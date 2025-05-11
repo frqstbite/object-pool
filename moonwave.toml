@@ -1,0 +1,16 @@
+gitSourceBranch = "main"
+
+[docusaurus]
+url = "https://frqstbite.github.io/"
+tagline = "The last object pool implementation you'll ever need."
+
+[navbar]
+title = ""
+
+[navbar.logo]
+alt = "object-pool"
+src = "/logo.svg"
+
+[home]
+enabled = true
+includeReadme = false
