@@ -1,5 +1,5 @@
 {
-	"name": "ObjectPool",
+	"name": "object-pool",
 	"tree": {
 		"$path": "lib"
 	}
