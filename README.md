@@ -1,5 +1,6 @@
 <div align="center">
-    <img src=".moonwave/static/logo.svg" alt="Matter" width="300" />
+    <img src=".moonwave/static/logo-light.svg#gh-dark-mode-only" width="300" />
+    <img src=".moonwave/static/logo-dark.svg#gh-light-mode-only" width="300" />
     <h1>Object Pool</h1>
 </div>
 <div align="center">
