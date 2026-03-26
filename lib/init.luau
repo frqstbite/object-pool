@@ -146,7 +146,13 @@ end
 ]=]
 function ObjectPool.Borrow<T>(self: ObjectPool<T>): (T, () -> ())
 	-- Generate new object if necessary
-	local object = (if (self.objects <= 0) then self:_generate() else table.remove(self._pool, 1)) :: T
+	local object: T;
+	if (self.objects <= 0) then
+		object = self:_generate()
+		table.remove(self._pool, #self._pool);
+	else
+		object = table.remove(self._pool, 1)
+	end
 	self.objects -= 1
 	
 	return object, function()
