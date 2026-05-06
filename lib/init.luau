@@ -59,8 +59,8 @@ export type ObjectPool<T> = typeof(setmetatable({}, ObjectPool)) & {
 	minimum: number?,
 	maximum: number?,
 
-	_managed: {[T]: true},
-	_pool: {T},
+	_managed: { [T]: true },
+	_pool: { T },
 	_generator: () -> T,
 }
 
@@ -84,7 +84,7 @@ function ObjectPool.new<T>(generator: () -> T, minimum: number?, maximum: number
 	if minimum and maximum and minimum > maximum then
 		error("ObjectPool minimum cannot be greater than its maximum")
 	end
-	
+
 	local self = setmetatable({
 		_generator = generator,
 		_managed = {},
@@ -94,14 +94,14 @@ function ObjectPool.new<T>(generator: () -> T, minimum: number?, maximum: number
 		minimum = minimum,
 		maximum = maximum,
 	}, ObjectPool) :: ObjectPool<T>
-	
+
 	-- Populate pool with minimum objects
 	if minimum then
 		for _ = 1, minimum do
 			self:_generate()
 		end
 	end
-	
+
 	return self
 end
 
@@ -122,12 +122,12 @@ function ObjectPool._generate<T>(self: ObjectPool<T>): T
 	if self.maximum and #self._pool >= self.maximum then
 		error("Attempt to generate new object for full ObjectPool")
 	end
-	
+
 	local object = self._generator()
 	table.insert(self._pool, object)
 	self._managed[object] = true
 	self.objects += 1
-	
+
 	return object
 end
 
@@ -154,7 +154,7 @@ function ObjectPool.Borrow<T>(self: ObjectPool<T>): (T, () -> ())
 		object = table.remove(self._pool, 1)
 	end
 	self.objects -= 1
-	
+
 	return object, function()
 		self:Return(object)
 	end
@@ -180,6 +180,5 @@ function ObjectPool.Return<T>(self: ObjectPool<T>, object: T)
 	table.insert(self._pool, object)
 	self.objects += 1
 end
-
 
 return ObjectPool
