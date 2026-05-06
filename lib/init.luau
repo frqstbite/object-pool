@@ -97,7 +97,7 @@ function ObjectPool.new<T>(generator: () -> T, minimum: number?, maximum: number
 	
 	-- Populate pool with minimum objects
 	if minimum then
-		for i = 1, minimum do
+		for _ = 1, minimum do
 			self:_generate()
 		end
 	end
