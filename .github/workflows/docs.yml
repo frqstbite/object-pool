@@ -1,7 +1,6 @@
 name: documentation
 
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -26,15 +25,13 @@ jobs:
         run: moonwave build
 
       - name: Upload Build Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: build
 
   deploy:
     name: Deploy
-    if: github.event_name == 'push'
-    needs:
-      - build
+    needs: build
     permissions:
       pages: write
       id-token: write
@@ -43,5 +40,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Project
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
