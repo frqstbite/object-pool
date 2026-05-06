@@ -13,16 +13,22 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Install Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: "pnpm"
 
-      - name: Install Moonwave
-        run: npm install -g moonwave
+      - name: Install Dependencies
+        run: pnpm install
 
       - name: Generate Docs
-        run: moonwave build
+        run: pnpm moonwave build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v4
@@ -30,16 +36,16 @@ jobs:
           path: build
 
   deploy:
-    name: Deploy
     needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
     permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
