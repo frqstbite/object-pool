@@ -27,8 +27,8 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "sed -i 's/^version = \".*\"/version = \"${nextRelease.version}\"/' wally.toml; rojo build -o 'ObjectPool-v${nextRelease.version}.rbxm'",
-          "publishCmd": "wally publish --token $WALLY_TOKEN"
+          "prepareCmd": "wally login --token $WALLY_TOKEN; sed -i 's/^version = \".*\"/version = \"${nextRelease.version}\"/' wally.toml; rojo build -o 'ObjectPool-v${nextRelease.version}.rbxm'",
+          "publishCmd": "wally publish"
         }
       ],
       [
