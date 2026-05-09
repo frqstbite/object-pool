@@ -1,7 +1,6 @@
 name: documentation
 
 on:
-  pull_request:
   push:
     branches: [main]
 env:
@@ -23,10 +22,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: build
-  # Deploy if this isn't a CI run
   deploy:
     needs: build
-    if: ${{ github.event_name == 'push' }} 
     runs-on: ubuntu-latest
     steps:
       - id: deployment
