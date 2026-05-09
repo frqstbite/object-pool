@@ -16,14 +16,14 @@ jobs:
       - uses: CompeyDev/setup-rokit@v0.2.1
       - run: rokit install --no-trust-check
       - run: |
-          pnpm dlx                                                \
-            --package=semantic-release                            \
-            --package=@conventional-changelog-conventionalcommits \
-            --package=@semantic-release/commit-analyzer           \
-            --package=@semantic-release/release-notes-generator   \
-            --package=@semantic-release/exec                      \
-            --package=@semantic-release/git                       \
-            --package=@semantic-release/github                    \
+          pnpm dlx                                               \
+            --package=semantic-release                           \
+            --package=conventional-changelog-conventionalcommits \
+            --package=@semantic-release/commit-analyzer          \
+            --package=@semantic-release/release-notes-generator  \
+            --package=@semantic-release/exec                     \
+            --package=@semantic-release/git                      \
+            --package=@semantic-release/github                   \
             semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
