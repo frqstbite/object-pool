@@ -13,6 +13,10 @@ jobs:
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22.x"
+          cache: "pnpm"
       - uses: CompeyDev/setup-rokit@v0.2.1
       - run: rokit install --no-trust-check
       - run: |
