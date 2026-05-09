@@ -71,13 +71,13 @@ export type ObjectPool<T> = typeof(setmetatable({}, ObjectPool)) & {
 	The maximum, if provided, must be greater than or equal to the minimum, if provided.
 	:::
 
-	
+
 	@within ObjectPool<T>
 
 	@param generator () -> T -- Function that returns a new instance of an object this pool should manage.
 	@param minimum number? -- The minimum amount of objects this ObjectPool should contain.
 	@param maximum number? -- The maximum amount of objects this ObjectPool can contain. Further requests will throw an error.
-	
+
 	@return ObjectPool<T>
 ]=]
 function ObjectPool.new<T>(generator: () -> T, minimum: number?, maximum: number?)
@@ -146,10 +146,10 @@ end
 ]=]
 function ObjectPool.Borrow<T>(self: ObjectPool<T>): (T, () -> ())
 	-- Generate new object if necessary
-	local object: T;
-	if (self.objects <= 0) then
+	local object: T
+	if self.objects <= 0 then
 		object = self:_generate()
-		table.remove(self._pool, #self._pool);
+		table.remove(self._pool, #self._pool)
 	else
 		object = table.remove(self._pool, 1)
 	end
@@ -169,7 +169,7 @@ end
 
 	@method Return
 	@within ObjectPool<T>
-	
+
 	@param object T -- The object to return.
 ]=]
 function ObjectPool.Return<T>(self: ObjectPool<T>, object: T)
