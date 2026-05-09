@@ -6,6 +6,8 @@ on:
     branches:
       - main
 
+env:
+  HUSKY: 0
 jobs:
   build:
     name: Build
@@ -26,7 +28,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Generate Docs
         run: pnpm moonwave build
