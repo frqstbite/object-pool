@@ -1,0 +1,36 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+env:
+  HUSKY: 0
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: CompeyDev/setup-rokit@v0.2.1
+      - run: rokit install
+      - run: |
+          pnpm dlx                                                \
+            --package=semantic-release                            \
+            --package=@conventional-changelog-conventionalcommits \
+            --package=@semantic-release/commit-analyzer           \
+            --package=@semantic-release/release-notes-generator   \
+            --package=@semantic-release/exec                      \
+            --package=@semantic-release/git                       \
+            --package=@semantic-release/github                    \
+            semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WALLY_TOKEN: ${{ secrets.WALLY_TOKEN }}
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
